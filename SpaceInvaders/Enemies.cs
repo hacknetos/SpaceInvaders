@@ -11,7 +11,7 @@ namespace SpaceInvaders
         int yPos;
         int xPos;
         int life;
-        Boolean isAlife = true;
+        Boolean isAlife;
 
         public Enemies(int yPos, int xPos, int life)
         {
