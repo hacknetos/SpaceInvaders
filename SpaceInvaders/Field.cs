@@ -1,56 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders;
-
-
-namespace SpaceInvaders
+﻿namespace SpaceInvaders
 {
     internal class Field
     {
-        Char[,] field;
+        Char[,] map;
         List<Enemies> enemies;
         int playerPosition;
-        
+
         public Field(char[,] field, List<Enemies> enemies, int playerPosition)
         {
-            this.field = field;
+            this.map = field;
             this.enemies = enemies;
             this.playerPosition = playerPosition;
         }
 
+        public int PlayerPosition { get => playerPosition; set => playerPosition = value; }
+        public char[,] Map { get => map; set => map = value; }
 
         public async Task mapBuilder()
         {
             foreach (var item in enemies)
             {
-                field[item.XPos, item.YPos] = 'X';
+                map[item.XPos, item.YPos] = 'X';
             } //give all Enemies in the fild
             await Task.Delay(50);//NO waring in my projekt q(≧▽≦q)
-            field[playerPosition, field.GetLength(1) - 1] = 'V';//place the player
-            for (int y = 0; y < field.GetLength(0); y++)
+            map[playerPosition, map.GetLength(1) - 1] = 'V';//place the player
+            for (int y = 0; y < map.GetLength(0); y++)
             {
-                for (int x = 0; x < field.GetLength(1); x++)  
+                for (int x = 0; x < map.GetLength(1); x++)
                 {
-                    if (field[y,x] == '\0')
+                    if (map[y, x] == '\0')
                     {
-                       field[y, x] = ' ';
+                        map[y, x] = ' ';
                     }
                 }
-            }//alle Emty field was filld
+            }//alle Emty map was filld
 
         }//Build the Map
         public async Task mapOutput()
         {
-            while (spaceinvaders.spacemain._RUNNING)
+            while (spacemain._RUNNING)
             {
-                for (int y = 0; y < field.GetLength(0); y++)
+                for (int y = 0; y < map.GetLength(0); y++)
                 {
-                    for (int x = 0; x < field.GetLength(1); x++)
+                    for (int x = 0; x < map.GetLength(1); x++)
                     {
-                        Console.Write(field[y, x]);
+                        Console.Write(map[y, x]);
                     }
                     Console.Write("\n");//new line
                     await Task.Delay(100);//so that you can see it
