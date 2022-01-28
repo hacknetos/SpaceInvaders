@@ -6,9 +6,9 @@
         List<Enemies> enemies;
         int playerPosition;
 
-        public Field(char[,] field, List<Enemies> enemies, int playerPosition)
+        public Field(int y,  int x, List<Enemies> enemies, int playerPosition)
         {
-            this.map = field;
+            this.map = new char[y,x];
             this.enemies = enemies;
             this.playerPosition = playerPosition;
         }
@@ -20,13 +20,14 @@
         {
             foreach (var item in enemies)
             {
-                map[item.XPos, item.YPos] = 'X';
+                map[item.YPos, item.XPos] = 'X';
             } //give all Enemies in the fild
-            await Task.Delay(50);//NO waring in my projekt q(≧▽≦q)
             map[playerPosition, map.GetLength(1) - 1] = 'V';//place the player
-            for (int y = 0; y < map.GetLength(0); y++)
+            await Task.Delay(100);//NO waring in my projekt q(≧▽≦q)
+
+            for (int y = 0; y < map.GetLength(1); y++)
             {
-                for (int x = 0; x < map.GetLength(1); x++)
+                for (int x = 0; x < map.GetLength(0); x++)
                 {
                     if (map[y, x] == '\0')
                     {

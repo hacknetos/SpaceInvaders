@@ -3,8 +3,23 @@
     public class spacemain
     {
         static public Boolean _RUNNING;
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
+            List<Enemies> enemies = new List<Enemies>();
+            for (int i = 0; i < 5; i++)
+            {
+                enemies.Add(new Enemies(0, i, 1));
+            }
+            Field map = new Field(5, 10, enemies, 5);
+            Player player = new Player(5, 5, "peter", map);
+            
+
+           map.mapBuilder();
+            _RUNNING = true;
+           Task.Run(map.mapOutput);          
+           player.move();
+            
+
 
         }
     }

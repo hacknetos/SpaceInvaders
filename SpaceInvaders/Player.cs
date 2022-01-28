@@ -68,7 +68,8 @@
                 bullet.YPos = Pos;
                 bullet.XPos = i;
                 map.Map[Pos,i] = '|';
-               await Task.Delay(150);
+                map.Map[Pos,i-1] = ' ';
+               await Task.Delay(110);
             }
         }
     }
