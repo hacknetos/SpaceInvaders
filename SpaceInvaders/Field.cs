@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using SpaceInvaders;
 
+
 namespace SpaceInvaders
 {
     internal class Field
     {
-       private Char[,] field;
-       private List<Enemies> enemies;
-       private int playerPosition;
+        Char[,] field;
+        List<Enemies> enemies;
+        int playerPosition;
         
         public Field(char[,] field, List<Enemies> enemies, int playerPosition)
         {
@@ -23,23 +24,24 @@ namespace SpaceInvaders
 
         public async Task mapBuilder()
         {
-           await foreach (var item in enemies)
+            foreach (var item in enemies)
             {
                 field[item.XPos, item.YPos] = 'X';
-            }
-           field[playerPosition, field.GetLength(1) - 1] = 'V';
+            } //give all Enemies in the fild
+            await Task.Delay(50);//NO waring in my projekt q(≧▽≦q)
+            field[playerPosition, field.GetLength(1) - 1] = 'V';//place the player
             for (int y = 0; y < field.GetLength(0); y++)
             {
-                for (int x = 0; x < field.GetLength(1); x++)
+                for (int x = 0; x < field.GetLength(1); x++)  
                 {
                     if (field[y,x] == '\0')
                     {
                        field[y, x] = ' ';
                     }
                 }
-            }
-           
-        }
+            }//alle Emty field was filld
+
+        }//Build the Map
         public async Task mapOutput()
         {
             while (spaceinvaders.spacemain._RUNNING)
@@ -50,11 +52,11 @@ namespace SpaceInvaders
                     {
                         Console.Write(field[y, x]);
                     }
-                    Console.Write("\n");
-                    await Task.Delay(100);
-                    Console.Clear();
+                    Console.Write("\n");//new line
+                    await Task.Delay(100);//so that you can see it
+                    Console.Clear();//So that it is not among each other AMOG US *~(￣▽￣)~*
                 }
             }
-        }
+        }// give the map on the console 
     }
 }
