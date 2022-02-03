@@ -22,8 +22,8 @@
 
         public async Task move()
         {
-            while (spacemain._RUNNING) ;
-            {
+          do
+          {
 
                 if (Console.KeyAvailable)
                 {
@@ -32,15 +32,21 @@
                     {
 
                         case ConsoleKey.LeftArrow:
-                            if (Pos > 0 && Pos < map.Map.GetLength(0))
+                            if (Pos >= 0 && Pos <= map.Map.GetLength(1))
                             {
                                 pos--;
+                                map.PlayerPosition = pos;
+                                Console.WriteLine("Left");
+                                map.playerHasMove('L');
                             }
                             break;
                         case ConsoleKey.RightArrow:
-                            if (Pos > 0 && Pos < map.Map.GetLength(0))
+                            if (Pos >=0 && Pos <= map.Map.GetLength(1))
                             {
                                 pos++;
+                                map.PlayerPosition=pos;
+                                map.playerHasMove('R');
+                                Console.WriteLine("Right");
                             }
                             break;
                         case ConsoleKey.Spacebar:
@@ -53,11 +59,19 @@
                         default:
                             break;
                     }
+                    if (pos < 0 )
+                    {
+                        pos = map.Map.GetLength(1);
+                        map.playerHasMove('R');
+                    }
+                    if (map.Map.GetLength(0)<pos)
+                    {
+                        pos = 0;
+                        map.playerHasMove('L');
+                    }
+                    
                 }
-
-
-                await Task.Delay(10);
-            }
+          } while (spacemain._RUNNING);
         }
 
         private async Task shot()

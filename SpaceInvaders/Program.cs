@@ -12,12 +12,11 @@
             }
             Field map = new Field(5, 10, enemies, 5);
             Player player = new Player(5, 5, "peter", map);
-            
-
-           map.mapBuilder();
             _RUNNING = true;
-           Task.Run(map.mapOutput);          
-           player.move();
+
+            map.mapBuilder();
+            Task.Run(map.mapOutput);
+            player.move();
             
 
 
