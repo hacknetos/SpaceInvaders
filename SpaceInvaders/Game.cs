@@ -65,7 +65,11 @@ namespace SpaceInvaders
                             }
                             break;
                         case ConsoleKey.Spacebar:
-                            player.shoot(true);
+                            Bullet bul = player.shoot(true);
+                            Task.Run(() =>
+                            {
+                               //TODO Bullet Fly 
+                            })
                             break;
                         case ConsoleKey.W:
                             break;
